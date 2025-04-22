@@ -1,0 +1,21 @@
+﻿@using global::Models
+<section class="border border-2 w-25 mt-3 p-2 d-flex flex-column gap-3">
+
+    <h3>Mis prestamos</h3>
+    <div class="grid_prestamos">
+        @if (Prestamos is not null && Prestamos.Count > 0)
+        {
+            @foreach (var item in Prestamos)
+            {
+                <p>Monto:@item.MONTO - <span>Estado:@item.ESTADO_ID</span></p>
+            }
+        }
+      
+</div>
+</section>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public List<PrestamoModelData> Prestamos { get; set; } = new List<PrestamoModelData>();
+}

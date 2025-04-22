@@ -1,0 +1,31 @@
+﻿@page "/"
+@inject UserLogged user;
+@inject NavigationManager navigationManager
+<PageTitle>Login</PageTitle>
+<figure class="main_card_container">
+    <div class="main_card">
+        <div class="main_card_text">
+            <h1 class="main_card_title">Iniciar sesion</h1>
+            <p class="main_card_subtitle">Ingrese sus credenciales para acceder</p>
+        </div>
+        <FormLogin />
+    </div>
+</figure>
+
+@code {
+   protected override void OnInitialized()
+    {
+        if (user.EstaLogueado)
+        {
+            switch (user.UsuarioActual.ROL_ID)
+            {
+                case ROL.USUARIO:
+                    navigationManager.NavigateTo("/prestamo");
+                    break;
+                case ROL.ADMINISTRADOR:
+                    navigationManager.NavigateTo("/admin");
+                    break;
+            }
+        }
+    }
+}

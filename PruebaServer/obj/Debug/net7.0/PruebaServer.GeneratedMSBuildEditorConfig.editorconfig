@@ -1,0 +1,69 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = PruebaServer
+build_property.RootNamespace = PruebaServer
+build_property.ProjectDir = D:\Proyectos\Blazor\PruebaServer\PruebaServer\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Proyectos\Blazor\PruebaServer\PruebaServer
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 7.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Pages/AdminPage/AdminPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5QYWdlXEFkbWluUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Pages/LoginPage/FormLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5QYWdlXEZvcm1Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Pages/LoginPage/LoginPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW5QYWdlXExvZ2luUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Pages/ClientPage/ClientPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50UGFnZVxDbGllbnRQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-rmkplwel3g
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Pages/ClientPage/FormPrestamo.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50UGFnZVxGb3JtUHJlc3RhbW8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-zkpwuupkro
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Pages/ClientPage/PrestamosList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50UGFnZVxQcmVzdGFtb3NMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-s1dtjx1t12
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-rpv8biamwb
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-7qi19lyiqr
+
+[D:/Proyectos/Blazor/PruebaServer/PruebaServer/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

@@ -1,0 +1,53 @@
+﻿@page "/prestamo"
+@inject NavigationManager navigationManager
+@inject UserLogged userLogged
+@inject ProtectedSessionStorage sessionStorage
+<PageTitle>Prestamos</PageTitle>
+@if (userLogged.EstaLogueado)
+{
+    <section class="ml_page">
+        <section class="main_seccion_prestamo">
+            <p class="title">Bienvenido @(userLogged.UsuarioActual?.EMAIL ?? "") </p>
+            <button onclick="@logOut" class="btn btn-secondary">Cerrar sesion</button>
+        </section>
+
+        <div class="border border-2 w-25 mt-3 p-2 d-flex flex-column gap-3">
+
+
+            <FormPrestamo onAddPrestamo="@AddPrestamo"></FormPrestamo>
+        </div>
+        <PrestamosList Prestamos="@prestamos" />
+    </section>
+}
+
+
+@code {
+
+    private Prestamos prestamosService = new();
+    protected override async Task OnInitializedAsync()
+    {
+        if (!userLogged.EstaLogueado) navigationManager.NavigateTo("/");
+        if (userLogged.UsuarioActual.ROL_ID != ROL.USUARIO)
+        {
+            navigationManager.NavigateTo("/");
+        }
+        prestamos = await prestamosService.GetAllPrestamo(userLogged.UsuarioActual.ID);
+        if (prestamos == null) prestamos = new List<PrestamoModelData>();
+        await base.OnInitializedAsync();
+    }
+
+
+
+    private List<PrestamoModelData> prestamos = new List<PrestamoModelData>();
+    private void AddPrestamo(PrestamoModelData prestamo)
+    {
+        prestamos.Add(prestamo);
+    }
+    private async void logOut()
+    {
+        navigationManager.NavigateTo("/");
+        userLogged.LimpiarUsuario();
+        await sessionStorage.DeleteAsync("usuario");
+    }
+    private string _personName = "Fernando";
+}

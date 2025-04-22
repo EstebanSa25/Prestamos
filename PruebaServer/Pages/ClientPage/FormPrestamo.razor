@@ -1,0 +1,31 @@
+@using PruebaServer.Models
+@using global::Data.Consultas
+@using global::Models
+@inject UserLogged userLogged
+@inject IToastService toast;
+<section class="container_card_prestamo">
+    <div class="container_card_prestamo_text">
+        <h3>Solicitar prestamo</h3>
+        <p>Ingrese el monto que desea solicitar</p>
+    </div>
+    <EditForm class="form w-auto" Model="@prestamo" OnSubmit="@HandleValidSubmit">
+        <div class="d-flex flex-column">
+            <label class="form-label">Monto</label>
+            <input class="input-group-lg" @bind-value="@prestamo.amount" type="number" placeholder="Monto" />
+        </div>
+        <button class="btn btn-primary mt-3" type="submit">Solicitar</button>
+    </EditForm>
+</section>
+@code {
+    [Parameter]
+    [EditorRequired]
+    public EventCallback<PrestamoModelData> onAddPrestamo { get; set; }
+    private PrestamoModel prestamo = new();
+    private Prestamos prestamos = new();
+    private async Task HandleValidSubmit()
+    {
+       var result= await prestamos.CreatePrestamo(prestamo.amount, userLogged.UsuarioActual.ID);
+        if (prestamos != null) await onAddPrestamo.InvokeAsync(result);
+        toast.ShowSuccess("Prestamo creado correctamente");
+    }
+}

@@ -1,0 +1,14 @@
+﻿.grid_prestamos_container {
+    margin-top:2em;
+    border: 1px solid gray;
+    width: 19%;
+    padding: 1.5em;
+    border-radius: 0.5em;
+}
+.grid_prestamos {
+    margin-top:1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+}

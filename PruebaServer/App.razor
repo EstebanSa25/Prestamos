@@ -1,0 +1,38 @@
+﻿@inject ProtectedSessionStorage sessionStorage
+@inject UserLogged userLogged
+@inject NavigationManager navigation
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>No se encontró la página.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var resultado = await sessionStorage.GetAsync<UsuarioModel>("usuario");
+            if (resultado.Success && resultado.Value != null)
+            {
+                userLogged.EstablecerUsuario(resultado.Value);
+                StateHasChanged();
+                switch (userLogged.UsuarioActual.ROL_ID)
+                {
+                    case ROL.USUARIO:
+                        navigation.NavigateTo("/prestamo");
+                        break;
+                    case ROL.ADMINISTRADOR:
+                        navigation.NavigateTo("/admin");
+                        break;
+                }
+            }
+        }
+
+    }
+}

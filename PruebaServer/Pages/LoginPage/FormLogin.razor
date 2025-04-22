@@ -1,0 +1,50 @@
+@using PruebaServer.Models
+@inject ProtectedSessionStorage sessionStorage
+@inject IToastService toastService
+@inject NavigationManager navigation
+@inject IHttpContextAccessor httpContextAccessor
+@inject UserLogged userLogged
+<EditForm class="d-flex flex-column gap-3 w-25" Model="@loginModel" OnSubmit="@Login">
+    <p class="danger @(error != "" ? "block" : "hidden") ">@error</p>
+    <div class="d-flex flex-column gap-3">
+        <input class="p-2" @bind-value="@loginModel.Email" type="email" placeholder="Email">
+        <input class="p-2" @bind-value="@loginModel.Password" type="password" placeholder="Contraseña">
+    </div>
+    <button class="btn btn-dark p-2" type="submit">Ingresar</button>
+</EditForm>
+@code {
+
+
+
+    private LoginModel loginModel = new();
+    private string error = "";
+    private Login log = new();
+    private async void Login()
+    {
+        if (string.IsNullOrEmpty(loginModel.Email)) error = "Verifique su email";
+        if (string.IsNullOrEmpty(loginModel.Password)) error = "Verifique su clave";
+        var result = await log.ValidateLogin(loginModel.Email, loginModel.Password);
+        if (result != null)
+        {
+            userLogged.EstablecerUsuario(result);
+            await sessionStorage.SetAsync("usuario", result);
+            switch (result.ROL_ID)
+            {
+                case ROL.USUARIO:
+                    navigation.NavigateTo("/prestamo");
+                    break;
+                case ROL.ADMINISTRADOR:
+                    navigation.NavigateTo("/admin");
+                    break;
+                default:
+                    toastService.ShowError("Usuario no valido");
+                    error = "usuario invalido";
+                    break;
+            }
+        }
+        else
+        {
+            toastService.ShowError("Correo no valido");
+        }
+    }
+}

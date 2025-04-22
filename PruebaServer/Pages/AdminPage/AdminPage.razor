@@ -1,0 +1,80 @@
+﻿@page "/admin"
+@inject UserLogged userLogged
+@inject NavigationManager navigationManager
+@inject IToastService toastService
+@inject ProtectedSessionStorage sessionStorage
+
+<PageTitle>Admin</PageTitle>
+
+<h3>Hola @(userLogged.UsuarioActual?.EMAIL ?? "")</h3>
+
+
+<button class="btn btn-dark" onclick="@logOut">Cerrar Sesion</button>
+
+<section>
+    <div class="d-flex flex-column gap-2 border border-1 p-2">
+        <h1>Gestionar solicitudes de prestamos</h1>
+        @if (lstPrestamos.Count == 0)
+        {
+            <p>No hay prestamos pendientes</p>
+        }
+        else
+        {
+            @foreach (var item in lstPrestamos)
+            {
+                <figure class="d-flex flex-column border border-1 p-2">
+                    <p>Usuario:@item.EMAIL- Monto: $@item.MONTO - Estado:@item.ESTADO_ID</p>
+                    @if (item.ESTADO_ID == EstadoPrestamo.Pendiente)
+                    {
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-dark" @onclick="() => UpdateState(item.ID, EstadoPrestamo.Aprobado)">Aprobar</button>
+                            <button class="btn btn-danger" @onclick="() => UpdateState(item.ID, EstadoPrestamo.Rechazado)">Rechazar</button>
+                        </div>
+                    }
+                </figure>
+            }
+        }
+
+
+    </div>
+</section>
+
+
+@code {
+    public List<PrestamoModelData> lstPrestamos = new List<PrestamoModelData>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!userLogged.EstaLogueado) navigationManager.NavigateTo("/");
+        if (userLogged.UsuarioActual.ROL_ID != ROL.ADMINISTRADOR)
+        {
+            navigationManager.NavigateTo("/");
+        }
+        lstPrestamos.Clear();
+        lstPrestamos = await prestamos.GetAllPrestamo(null);
+        StateHasChanged();
+        await base.OnInitializedAsync();
+    }
+    private async Task UpdateState(int id,EstadoPrestamo estado)
+    {
+        var result= await prestamos.UpdateState(id, estado);
+        if (result)
+        {
+            lstPrestamos.Clear();
+            lstPrestamos = await prestamos.GetAllPrestamo(null);
+            toastService.ShowSuccess("Prestamo actualizado correctamente");
+        }
+        else
+        {
+            toastService.ShowError("El prestamo no se actualizo correctamente");
+        }
+    }
+    private Prestamos prestamos = new();
+    private async void logOut()
+    {
+        navigationManager.NavigateTo("/");
+        userLogged.LimpiarUsuario();
+        await sessionStorage.DeleteAsync("usuario");
+    }
+   
+}
